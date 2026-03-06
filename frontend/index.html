@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PriceSnap — Compare Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo">Price<span>Snap</span></div>
+    <div class="badge">Live</div>
+  </header>
+
+  <!-- LANDING -->
+  <div id="landing" class="screen active">
+    <div class="hero">
+      <div class="hero-tag">// Real-time price comparison</div>
+      <h1>Stop<br>Overpaying.<br><em>Always.</em></h1>
+      <p>Compare real prices across every major platform. Products or rides — we find you the best deal instantly.</p>
+      <div class="choice-grid">
+        <div class="choice-card products" onclick="showScreen('products')">
+          <span class="card-icon">🛍️</span>
+          <div class="card-title">Products</div>
+          <div class="card-desc">Paste any product URL and we compare real prices across platforms</div>
+          <div class="card-platforms">
+            <span class="platform-chip">Amazon</span>
+            <span class="platform-chip">Flipkart</span>
+            <span class="platform-chip">Myntra</span>
+          </div>
+        </div>
+        <div class="choice-card taxis" onclick="showScreen('taxis')">
+          <span class="card-icon">🚕</span>
+          <div class="card-title">Taxis & Rides</div>
+          <div class="card-desc">Enter pickup & drop to compare fares across ride platforms</div>
+          <div class="card-platforms">
+            <span class="platform-chip">Ola</span>
+            <span class="platform-chip">Uber</span>
+            <span class="platform-chip">Rapido</span>
+            <span class="platform-chip">InDrive</span>
+            <span class="platform-chip">BluSmart</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS SCREEN -->
+  <div id="products" class="screen">
+    <div class="screen-wrap" id="productForm">
+      <button class="back-btn" onclick="goBack()">← back</button>
+      <div class="screen-title">Product Comparison</div>
+      <p class="screen-sub">Paste a product URL from Amazon, Flipkart, or Myntra. We'll fetch the real price and find the same product on all other platforms.</p>
+      <div class="input-group">
+        <input type="text" class="url-input" id="productUrl" placeholder="https://www.amazon.in/dp/B09..." />
+        <button class="search-btn" id="productBtn" onclick="compareProducts()">Compare →</button>
+      </div>
+      <div class="hint">Supports: <span>amazon.in</span> · <span>flipkart.com</span> · <span>myntra.com</span></div>
+    </div>
+    <div class="loading-wrap" id="productLoading">
+      <div class="spinner"></div>
+      <div class="loading-text" id="loadingMsg">Fetching product...</div>
+    </div>
+    <div class="error-box" id="productError" style="display:none"></div>
+    <div id="productResults"></div>
+  </div>
+
+  <!-- TAXIS SCREEN -->
+  <div id="taxis" class="screen">
+    <div class="screen-wrap" id="taxiForm">
+      <button class="back-btn" onclick="goBack()">← back</button>
+      <div class="screen-title">Ride Comparison</div>
+      <p class="screen-sub">Enter pickup and drop-off. We calculate real distance and apply actual per-km rates for each platform.</p>
+      <div class="loc-grid">
+        <input type="text" class="url-input" id="pickup"  placeholder="📍 Pickup — e.g. Connaught Place, Delhi" />
+        <input type="text" class="url-input" id="dropoff" placeholder="🏁 Drop — e.g. Indira Gandhi Airport" />
+      </div>
+      <div class="input-group">
+        <select class="url-input" id="rideFilter" style="flex:0 0 160px">
+          <option value="all">All types</option>
+          <option value="bike">Bike only</option>
+          <option value="auto">Auto only</option>
+          <option value="cab">Cab only</option>
+        </select>
+        <button class="search-btn orange" id="taxiBtn" onclick="compareTaxis()">Compare →</button>
+      </div>
+      <div class="hint">Uses <span>real per-km rates</span> + Google Maps distance if API key is set</div>
+    </div>
+    <div class="loading-wrap orange" id="taxiLoading">
+      <div class="spinner"></div>
+      <div class="loading-text" id="taxiLoadingMsg">Calculating route...</div>
+    </div>
+    <div class="error-box" id="taxiError" style="display:none"></div>
+    <div id="taxiResults"></div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
